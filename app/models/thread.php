@@ -36,6 +36,11 @@ class Thread extends AppModel {
 		return $comments;
 	}
 
+	public function write(Comment $comment) {
+		$db = DB::conn();
+		$db->query( "INSERT INTO comment SET thread_id = ?, username = ?, body = ?, created=NOW()", array($this->id,$comment->username,$comment->body) );
+	}
+
 
 }
 ?>
