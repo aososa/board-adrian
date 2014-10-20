@@ -7,7 +7,7 @@
   <?php echo($com_key + 1)?>: <?=$com_val->username?> <?=$com_val->created?>
 </div>
 
-<div><?=$com_val->body?></div>
+<div><?php echo readable_text($com_val->body)?></div>
 
 </div>
 <?php endforeach ?>
