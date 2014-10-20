@@ -4,6 +4,6 @@
    You successfully created a new thread.
 </p>
 
-<a href="<?php echo url('thread/view', array('thread_id' => $thread->id)) ?>">
+<a href="<?php outputText(url('thread/view', array('thread_id' => $thread->id))) ?>">
    &larr; Go to Thread.
 </a>

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>DietCake <?php eh($title) ?></title>
+    <title>DietCake <?php outputText($title) ?></title>
 
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -29,7 +29,7 @@
     </div>
 
     <script>
-    console.log(<?php eh(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
+    console.log(<?php outputText(round(microtime(true) - TIME_START, 3)) ?> + 'sec');
     </script>
 
   </body>
