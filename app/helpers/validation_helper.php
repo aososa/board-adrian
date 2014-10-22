@@ -7,7 +7,7 @@ function validate_between($check, $min, $max) {
 
 function is_logged_in()
 {
-   if(!isset($_SESSION['username']))
+    if(!isset($_SESSION['id']))
     {
         return false;
     }

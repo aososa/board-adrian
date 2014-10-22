@@ -1,14 +1,20 @@
 <?php
 class ThreadController extends AppController {
+
     public function __construct($name)
     {
         parent::__construct($name);
         if(is_logged_in() === false) {
-           redirect($controller = 'user');
+            redirect($controller = 'user');
         }
     }
+
     public function index() {
-        $threads = Thread::getAll();
+
+        $current_page = Pagination::setPage(Param::get('page'));
+        $threads = Thread::getAll($current_page);
+        $page_links = Pagination::createPageLinks($current_page, Thread::countThreads());
+
         $this->set(get_defined_vars());
     }
 
@@ -25,20 +31,20 @@ class ThreadController extends AppController {
 
         switch ($page) {
             case 'write':
-            break;
-
+                break;
+ 
             case 'write_end':
-               $comment->body = Param::get('body');
-               try {
-                  $thread->write($comment);
-               } catch (ValidationException $e) {
-                  $page = 'write';
-               }
-               break;
+                $comment->body = Param::get('body');
+                try {
+                    $thread->write($comment);
+                } catch (ValidationException $e) {
+                    $page = 'write';
+                }
+                break;
             
             default:
-               throw new NotFoundException("{$page} is not found");
-               break;
+                throw new NotFoundException("{$page} is not found");
+                break;
         }
         
         $this->set(get_defined_vars());
@@ -57,9 +63,9 @@ class ThreadController extends AppController {
               $thread->title = Param::get('title');
               $comment->body = Param::get('body');
               try {
-                 $thread->create($comment);
+                  $thread->create($comment);
               } catch(ValidationException $e) {
-             $page = 'create';
+                  $page = 'create';
               }
               break;
         }
