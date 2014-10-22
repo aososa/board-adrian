@@ -17,9 +17,14 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="<?php outputText(url('thread/index'))?>">Home Screen</a>
-          <a class="brand" href="<?php outputText(url('thread/create'))?>">Create Thread</a>
-          <a class="brand" href="<?php outputText(url('user/add'))?>">Add User</a>
+	  <?php if(empty($_SESSION['id'])) : ?>
+             <a class="brand" href="<?php outputText(url('user/add'))?>">Register New User</a>
+             <a class="brand" href="<?php outputText(url('user/login'))?>">Log-in Exsting User</a>
+	  <?php else: ?>
+             <a class="brand" href="<?php outputText(url('thread/index'))?>">Home Screen</a>
+             <a class="brand" href="<?php outputText(url('thread/create'))?>">Create Thread</a>
+             <a class="brand" href="<?php outputText(url('user/logout'))?>">Logout</a>
+	  <?php endif ?>
         </div>
       </div>
     </div>

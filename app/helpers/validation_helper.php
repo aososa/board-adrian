@@ -5,4 +5,14 @@ function validate_between($check, $min, $max) {
 	return $min <= $n && $n <=$max;
 }
 
+function is_logged_in()
+{
+   if(!isset($_SESSION['username']))
+    {
+        return false;
+    }
+
+    return true;
+}
+
 ?>

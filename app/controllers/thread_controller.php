@@ -1,6 +1,12 @@
 <?php
 class ThreadController extends AppController {
-
+	public function __construct($name)
+	{
+		parent::__construct($name);
+		if(is_logged_in() === false) {
+		   redirect($controller = 'user');
+		}
+	}
 	public function index() {
 		$threads = Thread::getAll();
 		$this->set(get_defined_vars());
@@ -22,7 +28,6 @@ class ThreadController extends AppController {
 			break;
 
 			case 'write_end':
-			   $comment->username = Param::get('username');
 			   $comment->body = Param::get('body');
 			   try {
 			      $thread->write($comment);
@@ -50,7 +55,6 @@ class ThreadController extends AppController {
 		      break;
 		   case 'create_end':
 		      $thread->title = Param::get('title');
-		      $comment->username = Param::get('username');
 		      $comment->body = Param::get('body');
 		      try {
 		         $thread->create($comment);
