@@ -17,7 +17,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="<?php outputText(url('thread/index'))?>">DietCake Hello</a>
+          <a class="brand" href="<?php outputText(url('thread/index'))?>">Home Screen</a>
           <a class="brand" href="<?php outputText(url('thread/create'))?>">Create Thread</a>
           <a class="brand" href="<?php outputText(url('user/add'))?>">Add User</a>
         </div>
