@@ -18,10 +18,6 @@ $comment_body_length_max = $comment->validation['body']['length'][2];
    <div><em>Title</em> must be between <?php outputText($title_length_min)?> and <?php outputText($title_length_max)?> </div>
 <?php endif ?>
 
-<?php if(!empty($comment->validation_errors['username']['length'])): ?>
-   <div><em>Username</em> must be between <?php outputText($username_length_min)?> and <?php outputText($username_length_max)?> </div>
-<?php endif ?>
-
 <?php if(!empty($comment->validation_errors['body']['length'])): ?>
    <div><em>Comment content</em> must be between <?php outputText($comment_body_length_min)?> and <?php outputText($comment_body_length_max)?> </div>
 <?php endif ?>
@@ -31,8 +27,6 @@ $comment_body_length_max = $comment->validation['body']['length'][2];
 <form class="well" method="post" action="<?php outputText(url(''))?>">
    <label>Title</label>
    <input type="text" class="span2" name="title" value="<?php outputText(Param::get('title')) ?>">
-   <label>Your name</label>
-   <input type="text" class="span2" name="username" value="<?php outputText(Param::get('username'))?>">
    <label>Comment</label>
    <textarea name="body"><?php outputText(Param::get('body'))?></textarea>
    <br />
