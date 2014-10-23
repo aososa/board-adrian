@@ -1,5 +1,9 @@
 <?php
 class UserController extends AppController {
+
+    /**
+    * User registration action
+    */
     public function add() {
         $user = new User;
         $page = Param::get('page_next','add');
@@ -23,6 +27,9 @@ class UserController extends AppController {
         $this->render($page);
     }
 
+    /**
+    * Login existing account
+    */
     public function login() {
         $user = new User;
         $page = Param::get('page_next','login');
@@ -47,6 +54,9 @@ class UserController extends AppController {
         $this->render($page);
     }
 
+    /**
+    * Destroy session data for currently logged-in account
+    */
     public function logout()
     {
         session_unset();

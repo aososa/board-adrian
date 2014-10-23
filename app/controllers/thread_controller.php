@@ -1,6 +1,9 @@
 <?php
 class ThreadController extends AppController {
 
+    /**
+    * Checks if there is an account currently logged in since all actions under the thread controller require user authentication
+    */
     public function __construct($name)
     {
         parent::__construct($name);
@@ -9,6 +12,9 @@ class ThreadController extends AppController {
         }
     }
 
+    /**
+    * Displays all threads
+    */
     public function index() {
 
         $current_page = Pagination::setPage(Param::get('page'));
@@ -18,6 +24,9 @@ class ThreadController extends AppController {
         $this->set(get_defined_vars());
     }
 
+    /**
+    * View specific thread and display all comments
+    */
     public function view() {
         $thread = Thread::get(Param::get('thread_id'));
 
@@ -29,6 +38,9 @@ class ThreadController extends AppController {
         $this->set(get_defined_vars());
     }
 
+    /**
+    * Append new comment to existing thread
+    */
     public function write() {
         $thread = Thread::get(Param::get('thread_id'));
         $comment = new Comment;
@@ -56,6 +68,9 @@ class ThreadController extends AppController {
         $this->render($page);
     }
 
+    /**
+    * Create new thread with corresponding initial comment
+    */
     public function create() {
         $thread = new Thread;
         $comment = new Comment;

@@ -10,6 +10,10 @@ class User extends AppModel {
         ),
     );
 
+    /**
+    * Adds new user
+    * @param object $user
+    */
     public function create() {
         $this->validate();
         if($this->hasError()) {
@@ -22,6 +26,11 @@ class User extends AppModel {
         $db->query("INSERT INTO users (username, password, created, modified) VALUES (?, SHA1(?), NOW(), NOW())", $params);
     }
 
+    /**
+    * Checks if user is existing in the system
+    * @param str username, str password
+    * @return queried row
+    */
     public function authenticate($username, $password) {
         $db = DB::conn();
         $query = "SELECT id, username FROM users WHERE username = ? AND password = SHA1(?)";        
