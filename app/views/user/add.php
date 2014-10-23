@@ -23,6 +23,6 @@
    <label>Password</label>
    <input type="password" class="span3" name="password" value="<?php outputText(Param::get('password'))?>">
    <br />
-   <input type="hidden" name="page_next" value="add_end">
+   <input type="hidden" name="page_next" value="login">
    <button type="submit" class="Btn btn-primary">Submit</button>
 </form>

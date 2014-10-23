@@ -10,6 +10,9 @@ require_once HELPERS_DIR.'html_helper.php';
 require_once HELPERS_DIR.'validation_helper.php';
 require_once HELPERS_DIR.'url_helper.php';
 
+// Library
+require_once LIB_DIR.'pagination.php';
+
 // Vendor
 require_once VENDOR_DIR.'SimpleDBI/SimpleDBI.php';
 

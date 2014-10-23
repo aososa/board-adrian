@@ -10,6 +10,9 @@
 
 </div>
 <?php endforeach ?>
+<div class="pagination"> 
+    <?php echo $page_links ?> 
+</div>
 <form class="well" method="post" action="<?php outputText(url('thread/write'))?>">
   <label>Comment</label>
   <textarea name="body"><?php outputText(Param::get('body'))?></textarea>
