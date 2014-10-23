@@ -32,6 +32,15 @@ class Thread extends AppModel {
         return $thread_count;
     }
 
+    public static function countComments($thread_id)
+    {
+        $db = DB::conn();
+        $thread_count = $db->value("SELECT COUNT(id) FROM comment WHERE thread_id = $thread_id");
+
+        return $thread_count;
+    }
+
+
     public static function get($id) {
         $db = DB::conn();
         $row = $db->row("SELECT * FROM thread WHERE id = ?", array($id));
@@ -43,7 +52,7 @@ class Thread extends AppModel {
         return new self($row);        
     }
 
-    public function getComments() {
+    public function getComments($page) {
         $comments = array();
     
         $db = DB::conn();
@@ -52,7 +61,11 @@ class Thread extends AppModel {
         foreach($rows as $row) {
             $comments[] = new Comment($row);
         }
-        return $comments;
+
+        $limit = Pagination::MAX_ROWS;
+        $offset = ($page - 1) * $limit;
+
+        return array_slice($comments, $offset, $limit);
     }
 
     public function write(Comment $comment) {

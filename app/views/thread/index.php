@@ -16,5 +16,4 @@ You have successfully logged in.
 <div class="pagination">
     <?php echo $page_links ?>
 </div>
-<li><a class = "btn btn-large btn-primary" href = "<?php outputText(url('thread/create'))?>">Create New Thread</a></li>
 </ul>

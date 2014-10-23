@@ -20,7 +20,12 @@ class ThreadController extends AppController {
 
     public function view() {
         $thread = Thread::get(Param::get('thread_id'));
-        $comments = $thread->getComments();
+
+        $current_page = Pagination::setPage(Param::get('page'));
+        $comments = $thread->getComments($current_page);
+        Pagination::$pagination_for = 'comment';
+        $page_links = Pagination::createPageLinks($current_page, Thread::countComments($thread->id));
+
         $this->set(get_defined_vars());
     }
 
