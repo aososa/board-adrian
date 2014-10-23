@@ -7,10 +7,11 @@ class UserController extends AppController {
         switch($page) {
             case 'add':
                 break;
-            case 'add_end':
+            case 'login':
                 $user->username = Param::get('username');
                 $user->password = Param::get('password');
-                echo "User added";
+                //echo "User added";
+                $login_from_add = 1;
                 try {
                     $user->create();
                 } catch(ValidationException $e) {
@@ -19,7 +20,7 @@ class UserController extends AppController {
                 break;
         }
         $this->set(get_defined_vars());
-        $this->render('add');
+        $this->render($page);
     }
 
     public function login() {
