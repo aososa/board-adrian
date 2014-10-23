@@ -16,10 +16,16 @@ class ThreadController extends AppController {
     * Displays all threads
     */
     public function index() {
+        $current_page = max(Param::get('page'), 1);
+        $pagination = new SimplePagination($current_page,3);
+        #$threads_all = Thread::getAll($current_page,null, $pagination);
+        $threads = Thread::getAll();
+	$remaining_threads = array_slice($threads, $pagination->start_index);
+        $pagination->checkLastPage($remaining_threads);
 
-        $current_page = Pagination::setPage(Param::get('page'));
-        $threads = Thread::getAll($current_page);
-        $page_links = Pagination::createPageLinks($current_page, Thread::countThreads());
+        $page_links = createPaginationLinks(count($threads), $pagination->count);
+
+        $threads = array_slice($threads, $pagination->start_index - 1, $pagination->count);
 
         $this->set(get_defined_vars());
     }
@@ -30,10 +36,15 @@ class ThreadController extends AppController {
     public function view() {
         $thread = Thread::get(Param::get('thread_id'));
 
-        $current_page = Pagination::setPage(Param::get('page'));
+        $current_page = max(Param::get('page'), 1);
+        $pagination = new SimplePagination($current_page,3);
         $comments = $thread->getComments($current_page);
-        Pagination::$pagination_for = 'comment';
-        $page_links = Pagination::createPageLinks($current_page, Thread::countComments($thread->id));
+        $remaining_comments = array_slice($comments, $pagination->start_index);
+        $pagination->checkLastPage($remaining_comments);
+   
+        $page_links = createPaginationLinks(count($comments), $pagination->count, 'thread_id='. $thread->id);
+
+        $comments = array_slice($comments, $pagination->start_index - 1, $pagination->count);
 
         $this->set(get_defined_vars());
     }
