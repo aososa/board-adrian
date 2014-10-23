@@ -11,10 +11,11 @@ require_once HELPERS_DIR.'validation_helper.php';
 require_once HELPERS_DIR.'url_helper.php';
 
 // Library
-require_once LIB_DIR.'pagination.php';
+//require_once LIB_DIR.'pagination.php';
 
 // Vendor
 require_once VENDOR_DIR.'SimpleDBI/SimpleDBI.php';
+require_once VENDOR_DIR.'SimplePagination/SimplePagination.php';
 
 // config
 require_once CONFIG_DIR.'log.php';

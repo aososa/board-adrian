@@ -10,8 +10,16 @@
 
 </div>
 <?php endforeach ?>
-<div class="pagination"> 
-    <?php echo $page_links ?> 
+<div class="pagination">
+    <?php if($pagination->current > 1): ?> 
+        <a class='btn btn-small' href='?page=<?=$pagination->prev?>'>Previous</a>
+    <?php endif ?>
+
+    <?php echo $page_links ?>
+
+    <?php if(!$pagination->is_last_page): ?>
+        <a class='btn btn-small' href='?page=<?=$pagination->next?>'>Next</a>
+    <?php endif ?> 
 </div>
 <form class="well" method="post" action="<?php outputText(url('thread/write'))?>">
   <label>Comment</label>

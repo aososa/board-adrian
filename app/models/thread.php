@@ -13,7 +13,7 @@ class Thread extends AppModel {
     * @param int $page, current page for pagination
     * @return array of threads depending on pagination position
     */
-    public static function getAll($page) {
+    public static function getAll() {
         $threads = array();
         
         $db = DB::conn();
@@ -22,10 +22,7 @@ class Thread extends AppModel {
             $threads[] = new Thread($row);
         }
         
-        $limit = Pagination::MAX_ROWS;
-        $offset = ($page - 1) * $limit;
-
-        return array_slice($threads, $offset, $limit);
+	return $threads;
     }
 
     /**
@@ -73,7 +70,7 @@ class Thread extends AppModel {
     * @param int $page, current page for pagination
     * returns array of comments depending on the current page for pagination
     */
-    public function getComments($page) {
+    public function getComments() {
         $comments = array();
     
         $db = DB::conn();
@@ -83,10 +80,7 @@ class Thread extends AppModel {
             $comments[] = new Comment($row);
         }
 
-        $limit = Pagination::MAX_ROWS;
-        $offset = ($page - 1) * $limit;
-
-        return array_slice($comments, $offset, $limit);
+        return $comments;
     }
 
     /**
