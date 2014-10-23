@@ -8,7 +8,11 @@ class Thread extends AppModel {
         ),
     );
         
-
+    /**
+    * Get all threads
+    * @param int $page, current page for pagination
+    * @return array of threads depending on pagination position
+    */
     public static function getAll($page) {
         $threads = array();
         
@@ -24,6 +28,10 @@ class Thread extends AppModel {
         return array_slice($threads, $offset, $limit);
     }
 
+    /**
+    * Counts all existing threads
+    * @return thread count
+    */
     public static function countThreads()
     {
         $db = DB::conn();
@@ -32,15 +40,23 @@ class Thread extends AppModel {
         return $thread_count;
     }
 
+    /**
+    * Counts all comments for specific thread
+    * @param int thread id
+    * @return comment count
+    */
     public static function countComments($thread_id)
     {
         $db = DB::conn();
-        $thread_count = $db->value("SELECT COUNT(id) FROM comment WHERE thread_id = $thread_id");
+        $comment_count = $db->value("SELECT COUNT(id) FROM comment WHERE thread_id = $thread_id");
 
-        return $thread_count;
+        return $comment_count;
     }
 
-
+    /**
+    * Get specific thread information
+    * @param int thread id
+    */
     public static function get($id) {
         $db = DB::conn();
         $row = $db->row("SELECT * FROM thread WHERE id = ?", array($id));
@@ -52,6 +68,11 @@ class Thread extends AppModel {
         return new self($row);        
     }
 
+    /**
+    * Get all existing comments for specific thread 
+    * @param int $page, current page for pagination
+    * returns array of comments depending on the current page for pagination
+    */
     public function getComments($page) {
         $comments = array();
     
@@ -68,14 +89,22 @@ class Thread extends AppModel {
         return array_slice($comments, $offset, $limit);
     }
 
+    /**
+    * Inserts new comment to database
+    * @param object comment
+    */
     public function write(Comment $comment) {
         if(!$comment->validate()) {
             throw new ValidationException('invalid comment.');
         }
         $db = DB::conn();
-        $db->query( "INSERT INTO comment SET thread_id = ?, user_id = ?, body = ?, created=NOW()", array($this->id,$_SESSION['id'],$comment->body) );
+        $db->query("INSERT INTO comment SET thread_id = ?, user_id = ?, body = ?, created=NOW()", array($this->id,$_SESSION['id'],$comment->body) );
     }
 
+    /**
+    * Creates new thread and write initial comment
+    * @param object comment
+    */
     public function create(Comment $comment) {
         $this->validate();
         $comment->validate();
