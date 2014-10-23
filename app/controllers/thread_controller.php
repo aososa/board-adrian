@@ -47,21 +47,19 @@ class ThreadController extends AppController {
         $page = Param::get('page_next', 'write');
 
         switch ($page) {
-            case 'write':
-                break;
- 
-            case 'write_end':
-                $comment->body = Param::get('body');
-                try {
-                    $thread->write($comment);
-                } catch (ValidationException $e) {
-                    $page = 'write';
-                }
-                break;
-            
-            default:
-                throw new NotFoundException("{$page} is not found");
-                break;
+        case 'write':
+            break;
+        case 'write_end':
+            $comment->body = Param::get('body');
+            try {
+                $thread->write($comment);
+            } catch (ValidationException $e) {
+                $page = 'write';
+            }
+            break;           
+        default:
+            throw new NotFoundException("{$page} is not found");
+            break;
         }
         
         $this->set(get_defined_vars());
@@ -77,17 +75,17 @@ class ThreadController extends AppController {
         $page = Param::get('page_next','create');
     
         switch($page) {
-           case 'create':
-              break;
-           case 'create_end':
-              $thread->title = Param::get('title');
-              $comment->body = Param::get('body');
-              try {
-                  $thread->create($comment);
-              } catch(ValidationException $e) {
-                  $page = 'create';
-              }
-              break;
+        case 'create':
+            break;
+        case 'create_end':
+            $thread->title = Param::get('title');
+            $comment->body = Param::get('body');
+            try {
+               $thread->create($comment);
+            } catch(ValidationException $e) {
+               $page = 'create';
+            }
+            break;
         }
         
         $this->set(get_defined_vars());
