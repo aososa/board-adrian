@@ -23,7 +23,7 @@ class ThreadController extends AppController {
 	$remaining_threads = array_slice($threads, $pagination->start_index);
         $pagination->checkLastPage($remaining_threads);
 
-        $page_links = createPaginationLinks(count($threads), $pagination->count);
+        $page_links = createPaginationLinks(count($threads), $current_page, $pagination->count);
 
         $threads = array_slice($threads, $pagination->start_index - 1, $pagination->count);
 
@@ -42,7 +42,7 @@ class ThreadController extends AppController {
         $remaining_comments = array_slice($comments, $pagination->start_index);
         $pagination->checkLastPage($remaining_comments);
    
-        $page_links = createPaginationLinks(count($comments), $pagination->count, 'thread_id='. $thread->id);
+        $page_links = createPaginationLinks(count($comments), $current_page, $pagination->count, 'thread_id='. $thread->id);
 
         $comments = array_slice($comments, $pagination->start_index - 1, $pagination->count);
 

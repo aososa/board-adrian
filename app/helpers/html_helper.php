@@ -13,7 +13,7 @@ function readable_text($s)
     return $s;                    
 }
 
-function createPaginationLinks($total_rows, $max_rows, $extra_params = null) 
+function createPaginationLinks($total_rows, $current_page, $max_rows, $extra_params = null) 
 {
     if ($total_rows <= $max_rows) {
         $total_pages = 1;
@@ -24,7 +24,11 @@ function createPaginationLinks($total_rows, $max_rows, $extra_params = null)
     $page_counter = 1;
     $page_links = "";
     while ($page_counter <= $total_pages) {
-        $page_links .= "<a class='btn btn-small' href='?page={$page_counter}&{$extra_params}'>{$page_counter}</a>";
+        if($page_counter == $current_page) {
+            $page_links .= " <b>$current_page</b> ";
+        } else {
+            $page_links .= "<a class='btn btn-small' href='?page={$page_counter}&{$extra_params}'>{$page_counter}</a>";
+        }
         $page_counter++;
     }
     return $page_links;

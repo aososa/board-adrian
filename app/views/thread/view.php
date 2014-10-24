@@ -12,13 +12,13 @@
 <?php endforeach ?>
 <div class="pagination">
     <?php if($pagination->current > 1): ?> 
-        <a class='btn btn-small' href='?page=<?=$pagination->prev?>'>Previous</a>
+        <a class='btn btn-small' href='?page=<?=$pagination->prev?>&thread_id=<?=$thread->id?>'>Previous</a>
     <?php endif ?>
 
     <?php echo $page_links ?>
 
     <?php if(!$pagination->is_last_page): ?>
-        <a class='btn btn-small' href='?page=<?=$pagination->next?>'>Next</a>
+        <a class='btn btn-small' href='?page=<?=$pagination->next?>&thread_id=<?=$thread->id?>'>Next</a>
     <?php endif ?> 
 </div>
 <form class="well" method="post" action="<?php outputText(url('thread/write'))?>">
