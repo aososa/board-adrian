@@ -1,3 +1,7 @@
+<?php
+$username_length_min = $user->validation['username']['length'][1];
+$username_length_max = $user->validation['username']['length'][2];
+?>
 <h1>Create new user</h1>
 
 <?php if($user->hasError()): ?>
@@ -10,7 +14,7 @@
 	<?php endif ?>
 	
         <?php if(!empty($user->validation_errors['username']['length'])): ?>        
-                <div><em>Username</em> must only contain alpha-numeric values.</div>                                                                  
+                <div><em>Username</em> must have between <?php outputText($username_length_min) ?> and <?php outputText($username_length_max) ?> characters.</div>                                                                  
         <?php endif ?>	
 
       

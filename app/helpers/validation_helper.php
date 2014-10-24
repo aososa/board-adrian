@@ -7,12 +7,7 @@ function validate_between($check, $min, $max) {
 
 function is_logged_in()
 {
-    if(!isset($_SESSION['id']))
-    {
-        return false;
-    }
-
-    return true;
+    return (isset($_SESSION["id"]));
 }
 
 function letters_only($name)

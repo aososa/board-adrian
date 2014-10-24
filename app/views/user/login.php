@@ -1,7 +1,12 @@
 <h1>Login</h1>
-<?php if(!empty($login_from_add)): ?>
+<?php if(isset($login_from_add)): ?>
     <p class="alert alert-success">
         Account registered. Try logging in. :)
+    </p>
+<?php endif ?>
+<?php if(isset($login_failed)): ?>
+    <p class="alert alert-danger">
+        Wrong user credentials.
     </p>
 <?php endif ?>
 <h3>Please type your username and password</h3>

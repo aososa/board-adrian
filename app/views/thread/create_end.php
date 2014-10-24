@@ -1,4 +1,4 @@
-<h2><?=$thread->title?></h2>
+<h2><?php outputText($thread->title) ?></h2>
 
 <p class="alert alert-success">
    You successfully created a new thread.

@@ -1,4 +1,4 @@
-<h2><?=$thread->title?></h2>
+<h2><?php outputText($thread->title) ?></h2>
 
 <?php if($comment->hasError()): ?>
 <div class = "alert alert-block">
@@ -17,7 +17,7 @@
   <label>Comment</label>
   <textarea name="body"><?php outputText(Param::get('body'))?></textarea>
   <br />
-  <input type="hidden" name="thread_id" value="<?=$thread->id?>">
+  <input type="hidden" name="thread_id" value="<?php outputText($thread->id) ?>">
   <input type="hidden" name="page_next" value="write_end">
   <button type="submit" class="btn btn-primary">Submit</button>
   </form>

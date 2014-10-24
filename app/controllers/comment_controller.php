@@ -1,22 +1,24 @@
 <?php
-class CommentController extends AppController {
-
+class CommentController extends AppController 
+{
+    const MAX_ROWS_PER_PAGE = 3;
 
     /**
     * View specific thread and display all comments
     */
-    public function view() {
+    public function view() 
+    {
         $thread = Thread::get(Param::get('thread_id'));
-
-        $current_page = max(Param::get('page'), 1);
-        $pagination = new SimplePagination($current_page,3);
-        $comments = $thread->getComments($current_page);
-        $remaining_comments = array_slice($comments, $pagination->start_index);
+        $comments = array();
+        $current_page = max(Param::get('page'), SimplePagination::MIN_PAGE_NUM);
+        $pagination = new SimplePagination($current_page,self::MAX_ROWS_PER_PAGE);
+        $comments = Comment::getAll($thread->id);
+        $remaining_comments = array_slice($comments, $pagination->start_index + SimplePagination::MIN_PAGE_NUM);
         $pagination->checkLastPage($remaining_comments);
 
         $page_links = createPaginationLinks(count($comments), $current_page, $pagination->count, 'thread_id='. $thread->id);
 
-        $comments = array_slice($comments, $pagination->start_index - 1, $pagination->count);
+        $comments = array_slice($comments, $pagination->start_index, $pagination->count);
 
         $this->set(get_defined_vars());
     }
@@ -24,26 +26,27 @@ class CommentController extends AppController {
     /**
     * Append new comment to existing thread
     */
-    public function write() {
+    public function write() 
+    {
         $thread = Thread::get(Param::get('thread_id'));
         $comment = new Comment;
         $page = Param::get('page_next', 'write');
 
         switch ($page) {
-        case 'write':
-            break;
-        case 'write_end':
-            $comment->body = Param::get('body');
-            try {
-                $thread->write($comment);
-            } catch (ValidationException $e) {
-                $page = 'write';
+            case 'write':
+                break;
+            case 'write_end':
+                $comment->body = Param::get('body');
+                try {
+                    $comment->write($thread->id);
+                } catch (ValidationException $e) {
+                    $page = 'write';
+                }
+                break;
+            default:
+                throw new NotFoundException("{$page} is not found");
+                break;
             }
-            break;
-        default:
-            throw new NotFoundException("{$page} is not found");
-            break;
-        }
 
         $this->set(get_defined_vars());
         $this->render($page);
