@@ -10,7 +10,6 @@ class Thread extends AppModel {
         
     /**
     * Get all threads
-    * @param int $page, current page for pagination
     * @return array of threads depending on pagination position
     */
     public static function getAll() {
@@ -42,7 +41,6 @@ class Thread extends AppModel {
 
     /**
     * Get all existing comments for specific thread 
-    * @param int $page, current page for pagination
     * returns array of comments depending on the current page for pagination
     */
     public function getComments() {
