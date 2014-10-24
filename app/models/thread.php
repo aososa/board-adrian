@@ -26,31 +26,6 @@ class Thread extends AppModel {
     }
 
     /**
-    * Counts all existing threads
-    * @return thread count
-    */
-    public static function countThreads()
-    {
-        $db = DB::conn();
-        $thread_count = $db->value('SELECT COUNT(id) FROM thread');
-
-        return $thread_count;
-    }
-
-    /**
-    * Counts all comments for specific thread
-    * @param int thread id
-    * @return comment count
-    */
-    public static function countComments($thread_id)
-    {
-        $db = DB::conn();
-        $comment_count = $db->value("SELECT COUNT(id) FROM comment WHERE thread_id = $thread_id");
-
-        return $comment_count;
-    }
-
-    /**
     * Get specific thread information
     * @param int thread id
     */
