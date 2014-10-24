@@ -2,7 +2,7 @@
         
 <ul>
   <?php foreach ($threads as $row):?>
-    <li><a href = "<?php outputText(url('thread/view', array('thread_id' => $row->id)))?>"><?=$row->title?></a></li>
+    <li><a href = "<?php outputText(url('comment/view', array('thread_id' => $row->id)))?>"><?=$row->title?></a></li>
   <?php endforeach ?>
 <div class="pagination">
 <?php if($pagination->current > 1): ?>

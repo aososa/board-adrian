@@ -21,7 +21,7 @@
         <a class='btn btn-small' href='?page=<?=$pagination->next?>&thread_id=<?=$thread->id?>'>Next</a>
     <?php endif ?> 
 </div>
-<form class="well" method="post" action="<?php outputText(url('thread/write'))?>">
+<form class="well" method="post" action="<?php outputText(url('comment/write'))?>">
   <label>Comment</label>
   <textarea name="body"><?php outputText(Param::get('body'))?></textarea>
   <br />

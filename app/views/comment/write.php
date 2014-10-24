@@ -13,7 +13,7 @@
 
 <?php endif ?>
 
-<form class="well" method="post" action="<?php outputText(url('thread/write'))?>">
+<form class="well" method="post" action="<?php outputText(url('comment/write'))?>">
   <label>Comment</label>
   <textarea name="body"><?php outputText(Param::get('body'))?></textarea>
   <br />
