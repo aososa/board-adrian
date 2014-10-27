@@ -2,16 +2,6 @@
 class ThreadController extends AppController 
 {
     const MAX_ROWS_PER_PAGE = 3;
-    /**
-    * Checks if there is an account currently logged in since all actions under the thread controller require user authentication
-    */
-    public function __construct($name)
-    {
-        parent::__construct($name);
-        if(is_logged_in() === false) {
-            redirect($controller = 'user');
-        }
-    }
 
     /**
     * Displays all threads
