@@ -1,16 +1,6 @@
 <?php
-function redirect($controller)
+function redirect($url)
 {
-    switch ($controller) {
-        case 'thread':
-            header('Location: /thread/index');
-            break;
-        case 'user':
-            header('Location: /user/login');
-            break;
-        default:
-            header('Location: login');
-            break;
-    }
+    header("Location: $url");
 }
 ?>
