@@ -42,7 +42,7 @@ class UserController extends AppController {
                 $user->username = Param::get('username');
                 $user->password = Param::get('password');
                 try {
-                    $user_account = $user->authenticate($user->username, $user->password);
+                    $user_account = $user->authenticate();
                     $_SESSION['id'] = $user_account['id'];
                     $_SESSION['username'] = $user_account['username'];
                 } catch(NotFoundException $e) {

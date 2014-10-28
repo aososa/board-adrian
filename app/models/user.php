@@ -38,11 +38,11 @@ class User extends AppModel
     * @param str username, str password
     * @return queried row
     */
-    public function authenticate($username, $password) 
+    public function authenticate() 
     {
         $db = DB::conn();
         $query = "SELECT id, username FROM users WHERE username = ? AND password = SHA1(?)";        
-        $user_account = $db->row($query, array($username,$password));
+        $user_account = $db->row($query, array($this->username,$this->password));
         if(!$user_account) {
             $this->is_failed_login = true;
             throw new NotFoundException('user not found');

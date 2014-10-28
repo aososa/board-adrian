@@ -19,6 +19,3 @@
    <input type="hidden" name="page_next" value="home">
    <button type="submit" class="Btn btn-primary">Submit</button>
 </form>
-<?php
-
-?>
