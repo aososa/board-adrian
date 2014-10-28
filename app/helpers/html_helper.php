@@ -18,6 +18,8 @@ function createPaginationLinks($total_rows, $current_page, $max_rows, $extra_par
     $total_pages = SimplePagination::MIN_PAGE_NUM;
     if ($total_rows > $max_rows) {
         $total_pages = ceil($total_rows / $max_rows);
+    } else {
+        return;
     }
 
     $page_counter = SimplePagination::MIN_PAGE_NUM;
